@@ -1,4 +1,5 @@
-﻿using FirstMVCApp.Repositories;
+﻿using FirstMVCApp.Models;
+using FirstMVCApp.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FirstMVCApp.Controllers
@@ -13,7 +14,60 @@ namespace FirstMVCApp.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            var model = _repository.GetCodeSnippets();
+            return View("Index", model);
         }
+
+        public IActionResult Create()
+        {
+            return View("Create");
+        }
+
+        [HttpPost]
+        public IActionResult Create(IFormCollection collection)
+        {
+            CodeSnippetModel model = new CodeSnippetModel();          // se creaza un model nou pentru inserarea in baza de date
+            TryUpdateModelAsync(model);                                 // mapeaza datele din colectie - formular - pe modelul creat local
+            _repository.Add(model);                                     // se transmite modelul spre ORM
+
+
+            return RedirectToAction("Index");
+        }
+        public IActionResult Edit(Guid id)
+        {
+            var model = _repository.GetCodeSnippetById(id);
+            return View("Edit", model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(IFormCollection collection)
+        {
+            CodeSnippetModel model = new();
+            TryUpdateModelAsync(model);
+            _repository.Update(model);
+
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Details(Guid id)
+        {
+            return View("Details", _repository.GetCodeSnippetById(id));
+        }
+
+        [HttpGet]
+        public IActionResult Delete(Guid id)
+        {
+            _repository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public IActionResult Delete(Guid id, IFormCollection collection)
+        {
+            var model = _repository.GetCodeSnippetById(id);
+            return View("Delete", model);
+        }
+
     }
 }
+
