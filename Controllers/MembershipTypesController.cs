@@ -31,7 +31,7 @@ namespace FirstMVCApp.Controllers
         {
             var model = new MembershipTypeModel();
             TryUpdateModelAsync(model);
-            _repository.AddMembershiptType(model);
+            _repository.AddMembershipType(model);
 
             return RedirectToAction("Index");
         }

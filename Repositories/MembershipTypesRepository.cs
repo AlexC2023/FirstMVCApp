@@ -20,7 +20,7 @@ namespace FirstMVCApp.Repositories
             return _context.MembershipTypes;
         }
 
-        internal void AddMembershiptType(MembershipTypeModel model)
+        internal void AddMembershipType(MembershipTypeModel model)
         {
             _context.MembershipTypes.Add(model);
             _context.SaveChanges();
@@ -31,15 +31,15 @@ namespace FirstMVCApp.Repositories
             return _context.MembershipTypes.FirstOrDefault(a => a.IDMembershipType == id);
         }
 
-        internal void UpdateMembershipType(Guid id, MembershipTypeModel updatedMembership)
+        internal void UpdateMembershipType(Guid id, MembershipTypeModel model)
         {
-            _context.MembershipTypes.Update(updatedMembership);
+            _context.MembershipTypes.Update(model);
             _context.SaveChanges();
         }
 
-        public void DeleteMembershipType(MembershipTypeModel membershipType)
+        public void DeleteMembershipType(MembershipTypeModel model)
         {
-            _context.MembershipTypes.Remove(membershipType);
+            _context.MembershipTypes.Remove(model);
             _context.SaveChanges();
         }
     }
