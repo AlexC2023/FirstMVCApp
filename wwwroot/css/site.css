@@ -9,10 +9,15 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
+    background-color: darkgray
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+    color: green;
+    font-weight: bold;
+    border: 1px solid blue;
+    background-color: powderblue;
 }
