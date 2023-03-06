@@ -50,11 +50,9 @@ namespace FirstMVCApp.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
-        public IActionResult Delete(Guid id, IFormCollection collection) 
-        {
-           var model = _repository.GetAnnouncementById(id);
-           return View("Delete", model);
+        public IActionResult Details(Guid id) 
+        { 
+            return View("Details", _repository.GetAnnouncementById(id));
         }
 
         [HttpGet]
@@ -64,10 +62,12 @@ namespace FirstMVCApp.Controllers
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        public IActionResult Details(Guid id) 
-        { 
-            return View("Details", _repository.GetAnnouncementById(id));
+        [HttpGet]
+        public IActionResult Delete(Guid id, IFormCollection collection)
+        {
+            var model = _repository.GetAnnouncementById(id);
+            return View("Delete", model);
         }
+
     }
 }
